@@ -1,0 +1,12 @@
+menu "NXS Remote Application"
+
+config APP_DEBUG_LED
+	bool "Enable LED indication for shift command results (debug only)"
+	default n
+	help
+	  シフトアップ/ダウンの成功・失敗をオンボードRGB LEDの点滅で示す。
+	  GPIO操作が増えるため、省電力を優先する通常ビルドでは無効のままにする。
+
+endmenu
+
+source "Kconfig.zephyr"

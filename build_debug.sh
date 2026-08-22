@@ -1,0 +1,1 @@
+west build -p always -b xiao_ble -s . -- -DEXTRA_CONF_FILE=debug.conf

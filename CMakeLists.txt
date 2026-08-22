@@ -4,4 +4,5 @@ project(nxs-controller)
 target_sources(app PRIVATE
 	src/main.c
 	src/nxs_wireless_client.c
+	src/debug_led.c
 )

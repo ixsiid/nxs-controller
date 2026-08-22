@@ -8,6 +8,7 @@
 
 #include "nxs_wireless_client.h"
 #include "nxs_macaddr.h"
+#include "debug_led.h"
 
 #define NON_WAKEUP_RESET_REASON (RESET_PIN | RESET_SOFTWARE | RESET_POR | RESET_DEBUG)
 
@@ -35,7 +36,6 @@ static void arm_wakeup_and_poweroff(void)
 
     hwinfo_clear_reset_cause();
     sys_poweroff();
-    /* 戻ってこない */
 }
 
 int main(void)
@@ -59,6 +59,7 @@ int main(void)
     if (up || down) {
         bt_enable(NULL);
         nxs_client_init(NXS_MAC, NXS_PIN);
+        debug_led_init();
 
         int retry = 3;
         bool ok = false;
@@ -67,6 +68,7 @@ int main(void)
                      : nxs_connect_down_disconnect();
         }
         printk("shift %s: %s\n", up ? "up" : "down", ok ? "ok" : "failed");
+        debug_led_shift_result(up, ok);
     }
 
     arm_wakeup_and_poweroff();
